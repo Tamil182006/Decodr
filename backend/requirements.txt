@@ -7,3 +7,5 @@ radon
 lizard
 requests
 pypandoc
+weasyprint
+matplotlib

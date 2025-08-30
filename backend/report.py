@@ -3,6 +3,7 @@ import re
 import sys
 import lizard
 import matplotlib.pyplot as plt
+import tempfile
 from datetime import datetime
 from fpdf import FPDF
 from reportlab.lib.pagesizes import letter
@@ -17,7 +18,7 @@ from collections import defaultdict
 from explainer import ALLOWED_EXTENSIONS, EXCLUDE_DIRS
 
 EXCLUDE_DIRS = {"node_modules", ".git", "__pycache__", "venv", ".idea", ".vscode"}
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "../output")
+OUTPUT_DIR = os.path.join(tempfile.gettempdir(), "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def remove_unicode(text):
