@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+requests
+lizard
+reportlab
+fpdf
+pypandoc
+weasyprint
