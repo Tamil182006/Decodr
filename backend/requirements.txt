@@ -9,3 +9,4 @@ requests
 pypandoc
 weasyprint
 matplotlib
+fpdf
