@@ -21,15 +21,12 @@ if not OPENROUTER_API_KEY:
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",  
-        "http://127.0.0.1:5173",  
-        "https://decodr.vercel.app",  
-    ],
+    allow_origins=["*"],  # allow all origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 
 # import your explainer (make sure explainer.py is next to this file)
@@ -147,15 +144,6 @@ async def upload_project(file: UploadFile = File(...), max_files: int = 20):
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "output_dir": OUTPUT_DIR}
-
-# Clean up on startup
-@app.on_event("startup")
-async def startup_event():
-    """Clean up old temp files on startup"""
-    result_zip_dir = os.path.join(OUTPUT_DIR, "temp_zips")
-    os.makedirs(result_zip_dir, exist_ok=True)
-    cleanup_old_temp_zips(result_zip_dir)
-    print("✅ Server started and temp files cleaned up")
     
 @app.post("/generate-report")
 async def generate_report_endpoint(file: UploadFile = File(...), max_files: int = 20):
