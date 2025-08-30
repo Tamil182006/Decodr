@@ -6,3 +6,4 @@ reportlab
 radon
 lizard
 requests
+pypandoc
