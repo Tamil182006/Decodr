@@ -5,6 +5,11 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import "./App.css";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://decodr.onrender.com";
+
+
+
 export default function App() {
   const [zipFile, setZipFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -68,7 +73,7 @@ export default function App() {
     form.append("max_files", "20");
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/upload", form, {
+      const res = await axios.post(`${API_URL}/upload`,  form, {
         responseType: "blob",
         onUploadProgress: (p) => {
           if (p.total) setProgress(Math.round((p.loaded * 100) / p.total));
@@ -132,8 +137,7 @@ export default function App() {
     form.append("max_files", "20");
 
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/generate-report",
+      const res = await axios.post(`${API_URL}/generate-report`,
         form,
         {
           responseType: "blob",
